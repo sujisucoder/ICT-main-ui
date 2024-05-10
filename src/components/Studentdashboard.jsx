@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Link, Grid, Card, CardContent, Button } from '@material-ui/core';
+import { makeStyles } from '@mui/material';
+import { AppBar, Toolbar, Typography, Link, Grid, Card, CardContent, Button } from '@mui/material';
 import { Navigate, Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import axiosInstance from '../axiosinterceptor';

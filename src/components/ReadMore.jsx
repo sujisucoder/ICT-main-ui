@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 const ReadMore = () => {
     const { projectId } = useParams();
