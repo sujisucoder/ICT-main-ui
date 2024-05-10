@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
+import {  Button, TextField, Typography } from "@mui/material";
 import axiosInstance from '../axiosinterceptor';
 
 const WeeklySubmissionForm = () => {
@@ -18,7 +17,7 @@ const WeeklySubmissionForm = () => {
             if (userEmail) {
                 try {
                     const response = await axiosInstance.get(
-                        `http://localhost:5000/api/student/user?email=${userEmail}`
+                        `https://hosting-project-1.onrender.com/api/student/user?email=${userEmail}`
                     );
                     setUser(response.data);
                 } catch (error) {
@@ -34,7 +33,7 @@ const WeeklySubmissionForm = () => {
         const fetchProject = async () => {
             if (user && user._id) {
                 try {
-                    const response = await axiosInstance.get(`http://localhost:5000/api/studentProjects/id/${user._id}`);
+                    const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/studentProjects/id/${user._id}`);
                     // Assuming the response is an array and contains a single project object
                     if (response.data.length > 0) {
                         setProject(response.data[0]); // Set the first project object in the array
@@ -79,14 +78,14 @@ const WeeklySubmissionForm = () => {
         try {
             const currentDate = new Date();
             const currentDay = currentDate.getDay();
-            if (currentDay === 6     || currentDay === 0) {
+            if (currentDay === 6 || currentDay === 0) {
                 if (lastSubmissionDate && isSameWeek(lastSubmissionDate, currentDate)) {
                     alert(
                         "You have already submitted this week. You can submit again next week."
                     );
                 } else {
                     const response = await axiosInstance.post(
-                        "http://localhost:5000/api/student/weekly-submission",
+                        "https://hosting-project-1.onrender.com/api/student/weekly-submission",
                         {
                             data: formData,
                             userName: user ? user.name : "", // Include user's name in the submission
@@ -105,12 +104,12 @@ const WeeklySubmissionForm = () => {
             console.error("Error submitting data:", error);
         }
     };
-    
+
 
     return (
         <div style={{
             background: "linear-gradient(130deg, #231a6f, #0f054c)",
-            minHeight: '100vh', 
+            minHeight: '100vh',
             padding: '100px'
         }}>
             <Typography variant="h4" gutterBottom style={{ color: 'white' }}>
@@ -147,7 +146,7 @@ const WeeklySubmissionForm = () => {
                 </Button>
             </div>
         </div>
-        
+
 
 
 

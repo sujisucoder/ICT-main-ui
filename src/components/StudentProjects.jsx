@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Link, Grid, Card, CardContent, Button } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosinterceptor';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import proImg1 from '../images/project6.jpg';
 import proImg2 from '../images/project2.jpg';
@@ -34,7 +35,7 @@ const StudentProjects = () => {
 
     const getUser = async (email) => {
         try {
-            const user = await axiosInstance.get(`http://localhost:5000/api/student/user?email=${email}`);
+            const user = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/student/user?email=${email}`);
             setUser(user.data);
             setError(null);
         } catch (error) {
@@ -46,7 +47,7 @@ const StudentProjects = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axiosInstance.get('http://localhost:5000/api/project/get');
+                const response = await axiosInstance.get('https://hosting-project-1.onrender.com/api/project/get');
                 setProjects(response.data.projects);
             } catch (error) {
                 console.error('Error fetching projects:', error);
@@ -61,7 +62,7 @@ const StudentProjects = () => {
             alert("You have already selected a project");
         } else {
             try {
-                const response = await axiosInstance.post('http://localhost:5000/api/studentProjects/add', {
+                const response = await axiosInstance.post('https://hosting-project-1.onrender.com/api/studentProjects/add', {
                     projectId: project._id,
                     title: project.title,
                     studentId: user._id,
@@ -88,7 +89,7 @@ const StudentProjects = () => {
     return (
         <>
             <AppBar position="static" style={{ backgroundColor: '#231a6f' }}>
-                <Toolbar style={{ flexDirection: 'column' }}>
+                <Toolbar style={{ flexDirection: 'row' }}>
                     <a className="navbar-brand" href="index.html">
                         <img src="images/logo.png" alt="" style={{ height: "50px" }} />
                     </a>
@@ -96,10 +97,10 @@ const StudentProjects = () => {
                         Welcome, {user && user.name.toUpperCase()}
                     </Typography>
                     <Link component={RouterLink} to="/main" color="inherit" style={{ marginRight: '25px', color: '#fff' }}>
-                        Project-Dashboard
+                        <Button variant="contained">Project-Dashboard</Button>
                     </Link>
                     <Link component={RouterLink} to="/login" color="inherit" onClick={tokenrelease} style={{ color: '#fff' }}>
-                        Logout
+                        <Button variant="contained">Logout&nbsp;<LogoutIcon /></Button>
                     </Link>
                 </Toolbar>
             </AppBar>

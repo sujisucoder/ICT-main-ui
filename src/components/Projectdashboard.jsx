@@ -5,8 +5,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
-import { Box, TextField } from "@mui/material";
-import axios from "axios";
 import axiosInstance from "../axiosinterceptor";
 
 import Typography from '@mui/material/Typography';
@@ -33,7 +31,7 @@ const Projectdashboard = () => {
       // const currentDay='Sun Apr 29 2024 21:43:20 GMT+0530 (India Standard Time)';
       // Check if it's Saturday (day 6) or Sunday (day 0)
       if (currentDay === 6 || currentDay === 0) {
-        const response = await axiosInstance.post("http://localhost:5000/api/student/weekly-submission", { data: formData });
+        const response = await axiosInstance.post("https://hosting-project-1.onrender.com/api/student/weekly-submission", { data: formData });
         console.log(response.data); // Log the response from the backend
       } else {
         alert("Weekly submission is only allowed on weekends."); // Inform the user that submission is only allowed on weekends
@@ -56,50 +54,34 @@ const Projectdashboard = () => {
 
       }}
     >
-      {/* Content for the left side */}
-      {/* <div style={{ background: "#0f054c", flex: 1 }}>
-       
-        <div style={{ height: "100vh", width: "300px" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "40px",
-            }}
-          >
-            <Button color="secondary">Secondary</Button>
-            <br />
-          </div>
 
-          <Button href="/chat">Discussion-Form</Button>
+
+      <div style={{ flex: 3, padding: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Typography variant="h5" align="center" color="white">
+            PROJECT-DASHBOARD
+          </Typography>
         </div>
-      </div> */}
-
-      <div style={{ flex: 3,padding:'20px'}}>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-    <Typography variant="h5" align="center" color="white">
-        PROJECT-DASHBOARD
-    </Typography>
-  </div>
-       <br></br>
+        <br></br>
         <br />
-        <div style={{ padding:'40px' }}>
-          <Accordion sx={{ width: "100%"  }}>
+        <div style={{ padding: '40px' }}>
+          <Accordion sx={{ width: "100%" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
-              sx={{ fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000" ,
-              "&:hover": { 
-                backgroundColor: "#A9A9A9", // Change background color on hover 
-                color: "#FFFFFF"
-              }
-               }} // Increase font size and add background color
+              sx={{
+                fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
+                "&:hover": {
+                  backgroundColor: "#A9A9A9", // Change background color on hover 
+                  color: "#FFFFFF"
+                }
+              }} // Increase font size and add background color
             >
               Project Summary
             </AccordionSummary>
             <AccordionDetails>
-              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign:'start' }}>
+              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign: 'start' }}>
                 {" "}
                 {/* Increase font size */}
                 This is an online blood bank management system that helps in managing various blood bank operations effectively.
@@ -119,17 +101,18 @@ const Projectdashboard = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel3-content"
               id="panel3-header"
-              sx={{ fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
-              "&:hover": { 
-                backgroundColor: "#A9A9A9", // Change background color on hover 
-                color: "#FFFFFF"
-              }
-               }} // Increase font size and add background color
+              sx={{
+                fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
+                "&:hover": {
+                  backgroundColor: "#A9A9A9", // Change background color on hover 
+                  color: "#FFFFFF"
+                }
+              }} // Increase font size and add background color
             >
               Project Overview Document
             </AccordionSummary>
             <AccordionDetails>
-              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign:'start' }}>
+              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign: 'start' }}>
                 {" "}
                 {/* Increase font size */}
                 <a href="https://docs.google.com/document/d/1NFIpLm62qxZioa0gjIQVBszXldxytYklehKvAbrPyy4/edit?usp=sharing">Detailed documentation of the project must be provided in the pdf or document Format.
@@ -146,17 +129,18 @@ const Projectdashboard = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
-              sx={{ fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000" ,
-              "&:hover": { 
-                backgroundColor: "#A9A9A9", // Change background color on hover 
-                color: "#FFFFFF"
-              }
+              sx={{
+                fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
+                "&:hover": {
+                  backgroundColor: "#A9A9A9", // Change background color on hover 
+                  color: "#FFFFFF"
+                }
               }} // Increase font size and add background color
             >
               Technologies Used
             </AccordionSummary>
             <AccordionDetails>
-              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign:'start'  }}>
+              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign: 'start' }}>
                 React, Node.js, Express, MongoDB
               </div>
             </AccordionDetails>
@@ -166,17 +150,18 @@ const Projectdashboard = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
-              sx={{ fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
-              "&:hover": { 
-                backgroundColor: "#A9A9A9", // Change background color on hover 
-                color: "#FFFFFF"
-              }
-               }} // Increase font size and add background color
+              sx={{
+                fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
+                "&:hover": {
+                  backgroundColor: "#A9A9A9", // Change background color on hover 
+                  color: "#FFFFFF"
+                }
+              }} // Increase font size and add background color
             >
               Team Size
             </AccordionSummary>
             <AccordionDetails>
-              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign:'start'  }}>
+              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign: 'start' }}>
                 {" "}
                 {/* Increase font size */}
                 A group of 4 or 5 Members
@@ -188,17 +173,18 @@ const Projectdashboard = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
-              sx={{ fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
-              "&:hover": { 
-                backgroundColor: "#A9A9A9", // Change background color on hover 
-                color: "#FFFFFF"
-              }
-               }} // Increase font size and add background color
+              sx={{
+                fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
+                "&:hover": {
+                  backgroundColor: "#A9A9A9", // Change background color on hover 
+                  color: "#FFFFFF"
+                }
+              }} // Increase font size and add background color
             >
               Duration
             </AccordionSummary>
             <AccordionDetails>
-              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign:'start' }}>
+              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign: 'start' }}>
                 {" "}
                 {/* Increase font size */}
                 Three to five months.
@@ -216,17 +202,18 @@ const Projectdashboard = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
-              sx={{ fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
-              "&:hover": { 
-                backgroundColor: "#A9A9A9", // Change background color on hover 
-                color: "#FFFFFF"
-              }
-               }} // Increase font size and add background color
+              sx={{
+                fontSize: "1.2rem", backgroundColor: "#D3D3D3", color: " #000000",
+                "&:hover": {
+                  backgroundColor: "#A9A9A9", // Change background color on hover 
+                  color: "#FFFFFF"
+                }
+              }} // Increase font size and add background color
             >
               Reference materials
             </AccordionSummary>
             <AccordionDetails>
-              <div style={{fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign:'start'  }}>
+              <div style={{ fontSize: window.innerWidth <= 768 ? "1 rem" : "1.2rem", textAlign: 'start' }}>
                 {" "}
                 {/* Increase font size */}
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -242,7 +229,7 @@ const Projectdashboard = () => {
         {/* Content for the right side */}
       </div>
     </div>
-    
+
 
   );
 };

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
 import { Box, List, ListItem, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import axiosInstance from '../axiosinterceptor';
@@ -31,7 +30,7 @@ const Grades = () => {
         // Fetch user data
         const getUser = async () => {
             try {
-                const response = await axiosInstance.get(`http://localhost:5000/api/student/user?email=${userEmail}`);
+                const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/student/user?email=${userEmail}`);
                 setUser(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -48,7 +47,7 @@ const Grades = () => {
         const fetchProject = async () => {
             if (user && user._id) {
                 try {
-                    const response = await axiosInstance.get(`http://localhost:5000/api/studentProjects/id/${user._id}`);
+                    const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/studentProjects/id/${user._id}`);
                     if (response.data.length > 0) {
                         setProjectTitle(response.data[0].title);
                         setError(null);
@@ -67,48 +66,48 @@ const Grades = () => {
 
 
     return (
-        <Box sx={{ height:'100vh',display: 'flex', justifyContent: 'center',backgroundColor:"rgb(33 24 108)" }}>
+        <Box sx={{ height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: "rgb(33 24 108)" }}>
             <Box sx={{ width: '80%' }}>
-            <br />
-            <div style={{border:'3px solid white',padding:'40px',borderRadius:"20px"}}>
+                <br />
+                <div style={{ border: '3px solid white', padding: '40px', borderRadius: "20px" }}>
 
-                <Typography variant="h3" align="center" gutterBottom style={{ fontWeight: 'bold', color:'white' }}> Grade Card</Typography>
-                <SubHr />
-                <Typography variant="h6" align="left" gutterBottom style={{ fontWeight: 'bold', color:'white' }}>Student Name: {user && user.name} </Typography>
-                <SubHr />
-                <Typography variant="h6" align="left" gutterBottom style={{ fontWeight: 'bold', color:'white' }}>Student Project: {projectTitle} </Typography>
-                <MainHr />
-                <List>
-                    <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
-                        Application Process Assignment 1: {'8/10'}
-                    </ListItem>
+                    <Typography variant="h3" align="center" gutterBottom style={{ fontWeight: 'bold', color: 'white' }}> Grade Card</Typography>
                     <SubHr />
-                    <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
-                    Application Process Assignment 2: {'8/10'}
-                    </ListItem>
+                    <Typography variant="h6" align="left" gutterBottom style={{ fontWeight: 'bold', color: 'white' }}>Student Name: {user && user.name} </Typography>
                     <SubHr />
-                    <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
-                    Intermediate Exam: {'8/20'}
-                    </ListItem>
-                    <SubHr />
-                    <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
-                    Viva: {'8/20'}
-                    </ListItem>
-                    <SubHr />
-                    <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
-                    Final Submission: {'8/20'} 
-                    </ListItem>
-                    <SubHr />
-                    <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
-                    Final Exam: {'8/20'}
-                    </ListItem>
-                    <SubHr />
-                    <ListItem style={{ backgroundColor: "#87CEEB", fontWeight: 'bold', fontSize: '2.2rem' }} >
-                    Total Score: {'48/100'}
-                    </ListItem>
-                    <SubHr />
-                </List>
-            </div>
+                    <Typography variant="h6" align="left" gutterBottom style={{ fontWeight: 'bold', color: 'white' }}>Student Project: {projectTitle} </Typography>
+                    <MainHr />
+                    <List>
+                        <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
+                            Application Process Assignment 1: {'8/10'}
+                        </ListItem>
+                        <SubHr />
+                        <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
+                            Application Process Assignment 2: {'8/10'}
+                        </ListItem>
+                        <SubHr />
+                        <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
+                            Intermediate Exam: {'8/20'}
+                        </ListItem>
+                        <SubHr />
+                        <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
+                            Viva: {'8/20'}
+                        </ListItem>
+                        <SubHr />
+                        <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
+                            Final Submission: {'8/20'}
+                        </ListItem>
+                        <SubHr />
+                        <ListItem style={{ backgroundColor: '#f0f0f0', fontWeight: 'bold', fontSize: '1.2rem' }} >
+                            Final Exam: {'8/20'}
+                        </ListItem>
+                        <SubHr />
+                        <ListItem style={{ backgroundColor: "#87CEEB", fontWeight: 'bold', fontSize: '2.2rem' }} >
+                            Total Score: {'48/100'}
+                        </ListItem>
+                        <SubHr />
+                    </List>
+                </div>
 
             </Box>
         </Box>

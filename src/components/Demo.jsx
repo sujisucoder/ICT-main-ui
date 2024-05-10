@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Box, TextField } from "@mui/material";
-import axios from "axios";
 import axiosInstance from "../axiosinterceptor";
 
 const Demo = () => {
@@ -50,7 +49,7 @@ const Demo = () => {
           );
         } else {
           const response = await axiosInstance.post(
-            "http://localhost:5000/api/student/weekly-submission",
+            "https://hosting-project-1.onrender.com/api/student/weekly-submission",
             { data: formData }
           );
           console.log(response.data); // Log the response from the backend
@@ -92,7 +91,7 @@ const Demo = () => {
       teamSize: "3 developers",
       duration: "4 months",
       referenceMaterials: "Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-      },
+    },
     project4: {
       title: "Project 4",
       summary: "This is the summary for Project 4.",
@@ -101,7 +100,7 @@ const Demo = () => {
       teamSize: "3 developers",
       duration: "4 months",
       referenceMaterials: "Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-      },
+    },
     project5: {
       title: "Project 5",
       summary: "This is the summary for Project 5.",
@@ -110,7 +109,7 @@ const Demo = () => {
       teamSize: "3 developers",
       duration: "4 months",
       referenceMaterials: "Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-      },
+    },
     project6: {
       title: "Project 6",
       summary: "This is the summary for Project 6.",

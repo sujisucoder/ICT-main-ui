@@ -2,7 +2,7 @@ import React from "react";
 import "../css/bootstrap.css";
 
 import "../css/style.css";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link } from "react-router-dom"; // Import useNavigate
 const Home = () => {
   return (
     <div>

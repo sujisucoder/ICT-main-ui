@@ -19,7 +19,7 @@ const Profile = () => {
 
     const getUser = async (email) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/student/user?email=${email}`);
+            const response = await axios.get(`https://hosting-project-1.onrender.com/api/student/user?email=${email}`);
             setUser(response.data);
             setError(null);
         } catch (error) {
@@ -49,7 +49,7 @@ const Profile = () => {
                         <Typography variant="h4" component="h1" gutterBottom style={{ color: '#ffffff', marginBottom: '20px' }}>
                             P R O F I L E
                         </Typography>
-                        
+
                     </CardContent>
                 </Card>
                 <Card sx={{ backgroundColor: '#2d1d94', color: 'white', width: 700, borderRadius: '20px' }}>

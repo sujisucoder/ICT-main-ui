@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axiosInstance from '../axiosinterceptor';
 
@@ -18,7 +17,7 @@ const Projectsubmit = () => {
         // Fetch user data
         const getUser = async () => {
             try {
-                const response = await axiosInstance.get(`http://localhost:5000/api/student/user?email=${userEmail}`);
+                const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/student/user?email=${userEmail}`);
                 setUser(response.data);
                 setError(null);
             } catch (error) {
@@ -34,7 +33,7 @@ const Projectsubmit = () => {
         const fetchProject = async () => {
             if (user && user._id) {
                 try {
-                    const response = await axiosInstance.get(`http://localhost:5000/api/studentProjects/id/${user._id}`);
+                    const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/studentProjects/id/${user._id}`);
                     if (response.data.length > 0) {
                         const endDate = new Date(response.data[0].endDate);
                         const today = new Date();
@@ -64,7 +63,7 @@ const Projectsubmit = () => {
         setLoading(true);
 
         try {
-            const response = await axiosInstance.post('http://localhost:5000/api/student/projectsub/', {
+            const response = await axiosInstance.post('https://hosting-project-1.onrender.com/api/student/projectsub/', {
                 link,
                 comments,
             });
@@ -84,17 +83,17 @@ const Projectsubmit = () => {
     };
 
     return (
-        <div style={{ 
+        <div style={{
             background: "linear-gradient(130deg, #231a6f, #0f054c)",
-            minHeight: '100vh', 
-            padding: '70px' 
+            minHeight: '100vh',
+            padding: '70px'
         }}>
             <div className="custom-bg">
                 <div className="container mt-5 ">
-                    <h1 className="mb-4" style={{color:'white'}}>Project Submission</h1>
+                    <h1 className="mb-4" style={{ color: 'white' }}>Project Submission</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="link" className="form-label" style={{color:'white'}}>
+                            <label htmlFor="link" className="form-label" style={{ color: 'white' }}>
                                 Link:
                             </label>
                             <input
@@ -107,7 +106,7 @@ const Projectsubmit = () => {
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="comments" className="form-label" style={{color:'white'}}>
+                            <label htmlFor="comments" className="form-label" style={{ color: 'white' }}>
                                 Comments:
                             </label>
                             <textarea

@@ -6,9 +6,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { Box, TextField } from "@mui/material";
-import axios from "axios";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import axiosInstance from "../axiosinterceptor";
 
@@ -34,7 +31,7 @@ const Mern = () => {
       // const currentDay='Sun Apr 29 2024 21:43:20 GMT+0530 (India Standard Time)';
       // Check if it's Saturday (day 6) or Sunday (day 0)
       if (currentDay === 6 || currentDay === 0) {
-        const response = await axiosInstance.post("http://localhost:5000/api/student/weekly-submission", { data: formData });
+        const response = await axiosInstance.post("https://hosting-project-1.onrender.com/api/student/weekly-submission", { data: formData });
         console.log(response.data); // Log the response from the backend
       } else {
         alert("Weekly submission is only allowed on weekends."); // Inform the user that submission is only allowed on weekends
@@ -74,15 +71,15 @@ const Mern = () => {
         </div>
       </div> */}
 
-      <div style={{ flex: 3  }}>
-      <Typography variant="h3" align="center" color="white">
-      PROJECT-DASHBOARD
+      <div style={{ flex: 3 }}>
+        <Typography variant="h3" align="center" color="white">
+          PROJECT-DASHBOARD
 
-      </Typography>
+        </Typography>
         <br></br>
         <br />
-        <div style={{ marginLeft: "100px"}}>
-          <Accordion sx={{ width: "100%"  }}>
+        <div style={{ marginLeft: "100px" }}>
+          <Accordion sx={{ width: "100%" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
