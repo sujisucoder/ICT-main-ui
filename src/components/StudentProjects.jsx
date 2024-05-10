@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/material';
 import { AppBar, Toolbar, Typography, Link, Grid, Card, CardContent, Button } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosinterceptor';
@@ -20,57 +19,8 @@ const projectsOtherData = [
     { image: proImg6, link: '/readmore' },
 ];
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        minWidth: 275,
-        margin: theme.spacing(2),
-        backgroundColor: '#231a6f',
-        color: '#fff',
-        transition: 'transform 0.2s',
-        '&:hover': {
-            transform: 'scale(1.05)',
-            backgroundColor: '#0f054c',
-        },
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    description: {
-        fontSize: 16,
-        marginTop: theme.spacing(1),
-    },
-    media: {
-        height: 140,
-    },
-    link: {
-        color: '#fff',
-        textDecoration: 'none',
-        fontWeight: 'bold',
-    },
-    appBar: {
-        backgroundColor: '#231a6f',
-        [theme.breakpoints.down('sm')]: {
-            flexDirection: 'column',
-        },
-    },
-    titleTypography: {
-        flexGrow: 1,
-        textAlign: 'center',
-        [theme.breakpoints.down('sm')]: {
-            textAlign: 'left',
-        },
-    },
-    toolbar: {
-        [theme.breakpoints.down('sm')]: {
-            display: 'block',
-        },
-    },
-}));
-
 const StudentProjects = () => {
     const navigate = useNavigate();
-    const classes = useStyles();
     const [projects, setProjects] = useState([]);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
@@ -137,18 +87,18 @@ const StudentProjects = () => {
 
     return (
         <>
-            <AppBar position="static" className={classes.appBar}>
-                <Toolbar className={classes.toolbar}>
+            <AppBar position="static" style={{ backgroundColor: '#231a6f' }}>
+                <Toolbar style={{ flexDirection: 'column' }}>
                     <a className="navbar-brand" href="index.html">
                         <img src="images/logo.png" alt="" style={{ height: "50px" }} />
                     </a>
-                    <Typography variant="h6" className={classes.titleTypography}style={{ textAlign:'center' }}>
+                    <Typography variant="h6" style={{ flexGrow: 1, color: '#fff', textAlign: 'center' }}>
                         Welcome, {user && user.name.toUpperCase()}
                     </Typography>
-                    <Link component={RouterLink} to="/main" color="inherit" style={{ marginRight: '25px' }}>
+                    <Link component={RouterLink} to="/main" color="inherit" style={{ marginRight: '25px', color: '#fff' }}>
                         Project-Dashboard
                     </Link>
-                    <Link component={RouterLink} to="/login" color="inherit" onClick={tokenrelease}>
+                    <Link component={RouterLink} to="/login" color="inherit" onClick={tokenrelease} style={{ color: '#fff' }}>
                         Logout
                     </Link>
                 </Toolbar>
@@ -157,27 +107,19 @@ const StudentProjects = () => {
             <Grid container spacing={3}>
                 {projects.map((project, index) => (
                     <Grid item xs={12} sm={6} md={4} key={project.id}>
-                        <Card className={classes.root}>
-                            <img src={projectsOtherData[index].image} alt={project.title} className={classes.media} />
+                        <Card style={{ minWidth: 275, margin: 20, backgroundColor: '#231a6f', color: '#fff', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)', backgroundColor: '#0f054c' } }}>
+                            <img src={projectsOtherData[index].image} alt={project.title} style={{ height: 140 }} />
                             <CardContent>
-                                <Typography className={classes.title} gutterBottom>
+                                <Typography style={{ fontSize: 20, fontWeight: 'bold' }} gutterBottom>
                                     {project.title}
                                 </Typography>
-                                <Typography className={classes.description}>{project.description}</Typography>
-                                <Link
-                                    component={RouterLink}
-                                    to={`${projectsOtherData[index].link}/${project._id}`} // Add project ID to the URL
-                                    className={classes.link}
-                                >
+                                <Typography style={{ fontSize: 16, marginTop: 10 }}>{project.description}</Typography>
+                                <Link component={RouterLink} to={`${projectsOtherData[index].link}/${project._id}`} style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>
                                     Read more
                                 </Link>
                             </CardContent>
                         </Card>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleSelectProject(project, user)}
-                        >
+                        <Button variant="contained" color="primary" onClick={() => handleSelectProject(project, user)}>
                             Choose Project
                         </Button>
                     </Grid>
@@ -187,6 +129,4 @@ const StudentProjects = () => {
     );
 };
 
-
-
-    export default StudentProjects;
+export default StudentProjects;
