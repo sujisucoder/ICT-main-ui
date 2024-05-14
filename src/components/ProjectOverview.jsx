@@ -3,27 +3,19 @@ import { Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import axiosInstance from "../axiosinterceptor";
 
-
-
-
-
 const ProjectOverview = () => {
-
     const [project, setProject] = useState(null);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
-    const [selectedKeys, setSelectedKeys] = useState([]); // State to hold selected keys
+    const [selectedKeys, setSelectedKeys] = useState([]);
     const keyColors = ["#D3D3D3 ", "#D3D3D3", " #D3D3D3 ", "#D3D3D3", "#D3D3D3 ", "#D3D3D3"];
 
-    // Retrieve email from sessionStorage
     const userEmail = sessionStorage.getItem('currentUser');
 
-
     useEffect(() => {
-        // Fetch user data
         const getUser = async () => {
             try {
-                const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/student/user?email=${userEmail}`);
+                const response = await axiosInstance.get(`http://localhost:5000/api/student/user?email=${userEmail}`);
                 setUser(response.data);
                 setError(null);
             } catch (error) {
@@ -36,15 +28,12 @@ const ProjectOverview = () => {
     }, [userEmail]);
 
     useEffect(() => {
-        // Fetch project data
         const fetchProject = async () => {
             if (user && user._id) {
                 try {
-                    const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/studentProjects/id/${user._id}`);
-                    // Assuming the response is an array and contains a single project object
+                    const response = await axiosInstance.get(`http://localhost:5000/api/studentProjects/id/${user._id}`);
                     if (response.data.length > 0) {
-                        setProject(response.data[0]); // Set the first project object in the array
-                        console.log("user user user ", response.data[0].title);
+                        setProject(response.data[0]);
                         setError(null);
                     } else {
                         setError('No project found');
@@ -59,7 +48,6 @@ const ProjectOverview = () => {
         fetchProject();
     }, [user]);
 
-    // Function to handle selection of keys
     const handleKeySelect = (key) => {
         if (selectedKeys.includes(key)) {
             setSelectedKeys(selectedKeys.filter((selectedKey) => selectedKey !== key));
@@ -117,14 +105,11 @@ const ProjectOverview = () => {
             "duration": 3,
             "technologies": "Asp.net,MySQl",
         }
+        // Add more projects here...
     };
 
-
-    // Inside the ProjectOverview component
     return (
-
         <div
-
             style={{
                 display: "flex",
                 justifyContent: "center",
@@ -141,36 +126,55 @@ const ProjectOverview = () => {
                 <div style={{ marginLeft: "100px" }}>
                     {project && (
                         <div>
-                            {Object.keys(project).map((key, index) => (
-                                <Accordion
-                                    key={key}
-                                    expanded={selectedKeys.includes(key)}
-                                    onChange={() => handleKeySelect(key)}
-                                    sx={{ width: "100%", marginBottom: "10px", backgroundColor: keyColors[index % keyColors.length] }} // Different color for each key
-                                >
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        sx={{ backgroundColor: keyColors[index % keyColors.length] }} // Color for accordion heading
+                            {Object.keys(project)
+                                .filter(key => !['_id', 'projectId', 'studentId', 'email', 'count', '__v'].includes(key))
+                                .map((key, index) => (
+                                    <Accordion
+                                        key={key}
+                                        expanded={selectedKeys.includes(key)}
+                                        onChange={() => handleKeySelect(key)}
+                                        sx={{ width: "100%", marginBottom: "10px", backgroundColor: selectedKeys.includes(key) ? '#666' : keyColors[index % keyColors.length] }}
                                     >
-                                        <Typography
-                                            variant="body1"
-                                            style={{ color: 'black', cursor: 'pointer', textDecoration: 'none' }}
-                                            onMouseEnter={(e) => e.target.style.color = 'blue'}
-                                            onMouseLeave={(e) => e.target.style.color = 'black'}
+                                        <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            sx={{
+                                                backgroundColor: selectedKeys.includes(key) ? '#666' : keyColors[index % keyColors.length],
+                                                '&:hover': {
+                                                    backgroundColor: selectedKeys.includes(key) ? '#999' : '#ccc',
+                                                },
+                                            }}
                                         >
-                                            {key.toUpperCase()}
-                                        </Typography>
+                                            <Typography
+                                                variant="body1"
+                                                style={{
+                                                    color: selectedKeys.includes(key) ? 'white' : 'black',
+                                                    cursor: 'pointer',
+                                                    textDecoration: 'none'
+                                                }}
+                                                onMouseEnter={(e) => e.target.style.color = 'blue'}
+                                                onMouseLeave={(e) => e.target.style.color = selectedKeys.includes(key) ? 'white' : 'black'}
+                                            >
+                                                {key.toUpperCase()}
+                                            </Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails style={{ backgroundColor: 'white' }}>
+                                            {project[key] in projectsOtherData && (
+                                                <Typography variant="body2" style={{ color: 'black', fontWeight: 'bold' }}>
+                                                    Title: {projectsOtherData[project[key]].title} <br />
+                                                </Typography>
+                                            )}
+                                            <Typography variant="body1" gutterBottom style={{ color: 'black', fontWeight: 'bold' }}>
+                                                {project[key] in projectsOtherData ? projectsOtherData[project[key]].description : project[key]}
+                                            </Typography>
+                                            {project[key] in projectsOtherData && (
+                                                <Typography variant="body2" style={{ color: 'black', fontWeight: 'bold' }}>
+                                                    Technologies: {projectsOtherData[project[key]].technologies} <br />
+                                                </Typography>
+                                            )}
 
-
-                                    </AccordionSummary>
-                                    <AccordionDetails style={{ backgroundColor: 'white' }}> {/* White background for accordion details */}
-                                        <Typography variant="body1" gutterBottom style={{ color: 'black', fontWeight: 'bold' }}>
-                                            {project[key] in projectsOtherData ? projectsOtherData[project[key]].description : project[key]}
-                                        </Typography>
-                                    </AccordionDetails>
-                                </Accordion>
-                            ))}
-
+                                        </AccordionDetails>
+                                    </Accordion>
+                                ))}
                         </div>
                     )}
                     {error && <Typography>Error: {error}</Typography>}
@@ -181,7 +185,6 @@ const ProjectOverview = () => {
             </div>
         </div>
     );
-
 };
 
 export default ProjectOverview;
