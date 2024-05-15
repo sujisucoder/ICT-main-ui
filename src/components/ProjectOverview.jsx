@@ -31,7 +31,7 @@ const ProjectOverview = () => {
         const fetchProject = async () => {
             if (user && user._id) {
                 try {
-                    const response = await axiosInstance.get(``https://hosting-project-1.onrender.com/api/studentProjects/id/${user._id}`);
+                    const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/studentProjects/id/${user._id}`);
                     if (response.data.length > 0) {
                         setProject(response.data[0]);
                         setError(null);
