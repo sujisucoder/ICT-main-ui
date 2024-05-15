@@ -15,7 +15,7 @@ const ProjectOverview = () => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const response = await axiosInstance.get(`http://localhost:5000/api/student/user?email=${userEmail}`);
+                const response = await axiosInstance.get(`https://hosting-project-1.onrender.com/api/student/user?email=${userEmail}`);
                 setUser(response.data);
                 setError(null);
             } catch (error) {
